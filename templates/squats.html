@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squat Exercise Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        
+        .frame {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .frame {
+                width: 48%;
+                margin-bottom: 0;
+            }
+        }
+        
+        h2 {
+            text-align: center;
+            color: #444;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        
+        .video-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .instructions {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .instructions h3 {
+            color: #444;
+            margin-top: 0;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Squat Exercise Tracker</h1>
+    </div>
+    
+    <div class="container">
+        <!-- Live Camera Feed -->
+        <div class="frame">
+            <h2>Live Camera Feed</h2>
+            <div class="video-container">
+                <img src="{{ url_for('squats.video_feed') }}" alt="Live Camera Feed">
+            </div>
+        </div>
+
+        <!-- Feedback and Video -->
+        <div class="frame">
+            <h2>Reference Video & Stats</h2>
+            <div class="video-container">
+                <img src="{{ url_for('squats.feedback') }}" alt="Feedback and Video">
+            </div>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h3>How to perform proper squats:</h3>
+        <ul>
+            <li>Stand with your feet shoulder-width apart, toes pointing slightly outward</li>
+            <li>Keep your chest up and back straight</li>
+            <li>Push your hips back as if sitting down in a chair</li>
+            <li>Lower your body until your thighs are parallel to the floor</li>
+            <li>Keep your knees in line with your toes (don't let them collapse inward)</li>
+            <li>Keep your weight in your heels, not your toes</li>
+            <li>Push through your heels to return to standing position</li>
+        </ul>
+    </div>
+</body>
+</html>

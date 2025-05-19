@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack - Personalized Nutrition Plan</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --primary-dark: #388E3C;
+            --secondary-color: #2196F3;
+            --accent-color: #FF9800;
+            --dark-text: #333;
+            --light-text: #fff;
+            --background-light: #f5f5f5;
+            --gray-light: #e9e9e9;
+            --gray-medium: #d1d1d1;
+            --shadow: 0 4px 8px rgba(0,0,0,0.1);
+            --border-radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background-light);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .back-button i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-medium);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* Results Section */
+        .results-section {
+            margin-top: 2rem;
+        }
+        
+        .macros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .macro-box {
+            background-color: var(--gray-light);
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            text-align: center;
+        }
+        
+        .macro-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            color: var(--primary-dark);
+        }
+        
+        .macro-unit {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Food Suggestions */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .food-category {
+            background-color: var(--gray-light);
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+        }
+        
+        .food-category h3 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .food-list {
+            list-style-position: inside;
+            padding-left: 0.5rem;
+        }
+        
+        .food-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Meal Plans */
+        .meal-plan {
+            margin: 1.5rem 0;
+        }
+        
+        .meal {
+            margin-bottom: 2rem;
+            background-color: var(--gray-light);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .meal-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+        }
+        
+        .meal-options {
+            padding: 1rem;
+        }
+        
+        .meal-option {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        /* Tips Section */
+        .tips-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .tips-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .tips-list li:before {
+            content: '\f0eb';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+        
+        /* Print Button */
+        .print-btn {
+            background-color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-right: 1rem;
+        }
+        
+        .print-btn:hover {
+            background-color: #1976D2;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .food-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media print {
+            .header, .form-section, .btn {
+                display: none;
+            }
+            
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+            
+            .card {
+                box-shadow: none;
+                margin-bottom: 1rem;
+                page-break-inside: avoid;
+            }
+            
+            body {
+                background-color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <a href="/" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <h1>Personalized Nutrition Plan</h1>
+        <p>Get a customized diet plan based on your body metrics and fitness goals</p>
+    </div>
+
+    <div class="container">
+        <!-- Form Section -->
+        <div class="card form-section">
+            <div class="card-header">
+                Your Information
+            </div>
+            <div class="card-body">
+                <form action="/blueprints/diet/get_diet_suggestions" method="POST">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="weight">Weight (kg)</label>
+                            <input type="number" id="weight" name="weight" placeholder="Enter your weight" required step="0.1" min="30" max="250" value="{{ weight|default('', true) }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="height">Height (cm)</label>
+                            <input type="number" id="height" name="height" placeholder="Enter your height" required step="0.1" min="100" max="250" value="{{ height|default('170', true) }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age" placeholder="Enter your age" required min="15" max="100" value="{{ age|default('30', true) }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" required>
+                                <option value="male" {% if gender == 'male' %}selected{% endif %}>Male</option>
+                                <option value="female" {% if gender == 'female' %}selected{% endif %}>Female</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="activity_level">Activity Level</label>
+                            <select id="activity_level" name="activity_level" required>
+                                <option value="sedentary" {% if activity_level == 'sedentary' %}selected{% endif %}>Sedentary (little or no exercise)</option>
+                                <option value="light" {% if activity_level == 'light' %}selected{% endif %}>Light (exercise 1-3 days/week)</option>
+                                <option value="moderate" {% if activity_level == 'moderate' %}selected{% endif %}>Moderate (exercise 3-5 days/week)</option>
+                                <option value="active" {% if activity_level == 'active' %}selected{% endif %}>Active (exercise 6-7 days/week)</option>
+                                <option value="very_active" {% if activity_level == 'very_active' %}selected{% endif %}>Very Active (hard exercise daily)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="goal">Weight Goal</label>
+                            <select id="goal" name="goal" required>
+                                <option value="loss" {% if goal == 'Weight Loss' %}selected{% endif %}>Weight Loss</option>
+                                <option value="gain" {% if goal == 'Weight Gain' %}selected{% endif %}>Weight Gain</option>
+                                <option value="maintain" {% if goal == 'Weight Maintenance' %}selected{% endif %}>Maintain Weight</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dietary_preference">Dietary Preference</label>
+                            <select id="dietary_preference" name="dietary_preference">
+                                <option value="all" {% if dietary_preference == 'all' %}selected{% endif %}>No Restrictions</option>
+                                <option value="vegetarian" {% if dietary_preference == 'vegetarian' %}selected{% endif %}>Vegetarian</option>
+                                <option value="vegan" {% if dietary_preference == 'vegan' %}selected{% endif %}>Vegan</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Generate My Nutrition Plan</button>
+                </form>
+            </div>
+        </div>
+        
+        {% if macros %}
+        <!-- Results Section -->
+        <div class="results-section">
+            <div class="card">
+                <div class="card-header">
+                    Your Personalized Nutrition Plan
+                </div>
+                <div class="card-body">
+                    <h2>Daily Targets for {{ goal }}</h2>
+                    
+                    <!-- Macros Section -->
+                    <div class="macros-grid">
+                        <div class="macro-box">
+                            <h3>Calories</h3>
+                            <div class="macro-value">{{ macros.calories }}</div>
+                            <div class="macro-unit">kcal/day</div>
+                        </div>
+                        
+                        <div class="macro-box">
+                            <h3>Protein</h3>
+                            <div class="macro-value">{{ macros.protein }}</div>
+                            <div class="macro-unit">g/day</div>
+                        </div>
+                        
+                        <div class="macro-box">
+                            <h3>Carbohydrates</h3>
+                            <div class="macro-value">{{ macros.carbs }}</div>
+                            <div class="macro-unit">g/day</div>
+                        </div>
+                        
+                        <div class="macro-box">
+                            <h3>Fats</h3>
+                            <div class="macro-value">{{ macros.fat }}</div>
+                            <div class="macro-unit">g/day</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Food Suggestions -->
+                    <h2>Recommended Food Sources</h2>
+                    <div class="food-grid">
+                        <div class="food-category">
+                            <h3><i class="fas fa-drumstick-bite"></i> Protein Sources</h3>
+                            <ul class="food-list">
+                                {% for food in food_suggestions.proteins %}
+                                <li>{{ food }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+                        <div class="food-category">
+                            <h3><i class="fas fa-bread-slice"></i> Carbohydrate Sources</h3>
+                            <ul class="food-list">
+                                {% for food in food_suggestions.carbs %}
+                                <li>{{ food }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+                        <div class="food-category">
+                            <h3><i class="fas fa-cheese"></i> Healthy Fat Sources</h3>
+                            <ul class="food-list">
+                                {% for food in food_suggestions.fats %}
+                                <li>{{ food }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Sample Meal Plan -->
+                    <h2>Sample Meal Plan</h2>
+                    <p>Below are meal suggestions to help you meet your daily targets. Mix and match as desired.</p>
+                    
+                    <div class="meal-plan">
+                        {% for meal_item in meal_plan %}
+                        <div class="meal">
+                            <div class="meal-header">{{ meal_item.meal }}</div>
+                            <div class="meal-options">
+                                {% for option in meal_item.options %}
+                                <div class="meal-option">{{ option }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Nutrition Tips -->
+                    <h2>Nutrition Tips for {{ goal }}</h2>
+                    <ul class="tips-list">
+                        {% for tip in food_suggestions.tips %}
+                        <li>{{ tip }}</li>
+                        {% endfor %}
+                    </ul>
+                    
+                    <div class="buttons">
+                        <button onclick="window.print()" class="btn print-btn">
+                            <i class="fas fa-print"></i> Print My Plan
+                        </button>
+                        <button onclick="window.location.href='/blueprints/diet'" class="btn">
+                            <i class="fas fa-refresh"></i> Create New Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                // Basic form validation
+                const weight = document.getElementById('weight').value;
+                const height = document.getElementById('height').value;
+                const age = document.getElementById('age').value;
+                
+                if (!weight || !height || !age) {
+                    e.preventDefault();
+                    alert('Please fill out all required fields.');
+                    return false;
+                }
+                
+                // Additional validation could be added here
+            });
+        });
+    </script>
+</body>
+</html>

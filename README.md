@@ -19,6 +19,40 @@ This is an AI-powered fitness trainer web app that provides real-time workout gu
 - *HTML/CSS/JavaScript* (for frontend interface)
 - *Heroku* (for deployment)
 
+##Folder structure
+AI-Fitness-Trainer/
+│
+├── pushup/
+│   ├── pushup_detection.py              # Pose detection and feedback for push-ups
+│   ├── pushup_video.mp4                 # Pre-recorded push-up guidance video
+│   
+│
+├── squat/
+│   ├── squat_detection.py               # Pose detection and feedback for squats
+│   ├── squat_video.mp4                  # Pre-recorded squat guidance video
+│   
+│
+├── bicep_curl/
+│   ├── bicep_curl_detection.py          # Pose detection and feedback for bicep curls
+│   ├── bicep_curl_video.mp4             # Pre-recorded bicep curl guidance video
+│  
+│
+├── diet/
+│   ├── diet_plan.py                     # Diet plan based on weight and goal
+│   └── templates/
+│       └── diet.html                    # Diet plan UI page
+│
+├── templates/
+│   ├── index.html                       # Homepage with exercise and diet options
+│   ├── pushup.html                      # Push-up detection interface
+│   ├── squat.html                       # Squat detection interface
+│   ├── bicep_curl.html                  # Bicep curl detection interface
+│
+│
+├── app.py                               # Main Flask app routing to all pages
+├── requirements.txt                     # Python dependencies
+└── README.md                            # Project overview
+
 ## Installation
 
 1. Clone the repository:

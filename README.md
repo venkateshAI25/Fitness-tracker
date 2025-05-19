@@ -53,6 +53,50 @@ AI-Fitness-Trainer/
 ├── requirements.txt                     # Python dependencies
 └── README.md                            # Project overview
 
+##Demo Screenshots
+MAIN DASHBOARD 
+![image](https://github.com/user-attachments/assets/7f799d33-a2b4-432a-b79b-e6df5f7d0d27)
+
+DIET PLAN 
+ ![image](https://github.com/user-attachments/assets/a68cfadd-6cf2-41d0-8bea-afdaa14ab470)
+
+PUSH-UPS 
+![image](https://github.com/user-attachments/assets/0094ad1c-9892-4101-a049-051a874e7a09)
+
+BICEPS CURL
+![image](https://github.com/user-attachments/assets/2cc6d8bc-a6c0-4026-a824-a7a8d5f15661)
+
+SQUATS
+![image](https://github.com/user-attachments/assets/b9dea967-5ca6-4da7-a33e-4ec8df1fa2b5)
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+65 
+ 
+5.3.2 DIET PLAN 
+ 
+5.3.3 PUSH-UPS  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+66 
+ 
+5.3.4 BICEPS CURL 
+ 
+ 
+5.3.5 SQUATS 
+ 
 ## Installation
 
 1. Clone the repository:

@@ -20,6 +20,8 @@ This is an AI-powered fitness trainer web app that provides real-time workout gu
 - *Heroku* (for deployment)
 
 ##Folder structure
+
+```
 AI-Fitness-Trainer/
 │
 ├── pushup/
@@ -52,6 +54,7 @@ AI-Fitness-Trainer/
 ├── app.py                               # Main Flask app routing to all pages
 ├── requirements.txt                     # Python dependencies
 └── README.md                            # Project overview
+```
 
 ##Demo Screenshots
 MAIN DASHBOARD 
